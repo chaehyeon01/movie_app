@@ -6,25 +6,37 @@ import HeaderNav from "./headerNav";
 
 class App extends Component {
 
-  state = {
-    isLoding : true,
-    movies:[]
+  constructor(pros){
+    super(pros);
+    this.state = {
+      isLoding : true,
+      movies:[]
+    }
   }
+  
 
   getMovies = async () => {
 
-    try {
-
-      const listData=await axios.get("http://172.30.1.57:3001/movie");
-      console.log(listData.data.data); //api에서 얻은 무비 리스트를 state안에 넣어야함,
-      // console.log(moviesPoster);
-      this.setState({
-            movies:listData.data.data,
-            isLoding:false
-          });
-      } catch (error) {
-        console.log(error);
-      }  
+      const key="d7b5c5da82be18f1826b5ea09076df81";
+      const targetDt="20200603"
+      let item =[];
+      await axios.get("https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json",{
+            params: {
+                          key: key,
+                          targetDt:targetDt
+                    }
+                  }).then(function(response) {
+                      item = response.data.boxOfficeResult.dailyBoxOfficeList;
+                      console.log(item);
+                       
+                    }).catch(function(error) {
+                      console.log(error);
+                    });
+  
+                    this.setState({
+                      movies:item,
+                      isLoding:false
+                    });
    
   }
 
@@ -44,7 +56,7 @@ class App extends Component {
                     ) : ( 
                       <div className="movies">
                           {movies.map(movieList => (
-                              <Movie	key={movieList.rank} date={movieList.temporal} title={movieList.movieNm} grade={movieList.rank} />
+                              <Movie	key={movieList.rank} date={movieList.openDt} mvCode={movieList.movieCd} title={movieList.movieNm} grade={movieList.rank} />
                           ))}
                       </div>  
                         

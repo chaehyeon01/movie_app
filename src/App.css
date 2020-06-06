@@ -55,12 +55,12 @@ header > h1 > span {
     align-items: flex-start;
     flex-wrap: wrap;
     padding:150px 50px;
-    width:80%;
+    width:90%;
 }
 
 .movies .movie {
     position: relative;
-    width: 45%;
+    width: 48%;
     background-color: white;
     margin-bottom:100px;
     display: flex;
@@ -117,18 +117,21 @@ header > h1 > span {
     letter-spacing:0.5px;
 }
 
-.movieInnerData .movieLink {
-    margin-top:10px;
-    
+
+.movieInnerData .movieGenre {
+  color:#333;
+  font-size:16px;
+  margin-top:10px;
 }
 .moveiGrade {
     font-size:20px;
 }
-.movieLink a {
-    color: #333;
-} 
-.movieLink a:hover {
-    color:#fd7b48;
+
+.movieInnerData .movieText {
+
+    margin-top:10px;
+
+    
 }
 
 @media screen and (max-width:768px ) {
